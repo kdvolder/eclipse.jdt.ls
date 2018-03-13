@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -107,6 +108,8 @@ import org.eclipse.lsp4j.services.WorkspaceService;
  */
 public class JDTLanguageServer implements LanguageServer, TextDocumentService, WorkspaceService, WorkspaceFoldersProposedService, JavaProtocolExtensions {
 
+	ExecutorService executor = Executors.newSingleThreadExecutor();
+
 	public static final String JAVA_LSP_JOIN_ON_COMPLETION = "java.lsp.joinOnCompletion";
 	/**
 	 * Exit code returned when JDTLanguageServer is forced to exit.
@@ -158,6 +161,7 @@ public class JDTLanguageServer implements LanguageServer, TextDocumentService, W
 	 */
 	@Override
 	public void initialized(InitializedParams params) {
+		executor.execute(() -> client.executeCommand("say.hello", "JDT redhat says hello"));
 		if (preferenceManager.getClientPreferences().isWorkspaceFoldersSupported()) {
 			registerCapability(WorkspaceFoldersProposedService.CAPABILITY_ID, WorkspaceFoldersProposedService.CAPABILITY_NAME);
 		}
