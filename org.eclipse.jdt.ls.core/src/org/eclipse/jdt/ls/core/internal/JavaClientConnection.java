@@ -13,7 +13,7 @@ package org.eclipse.jdt.ls.core.internal;
 import java.util.List;
 
 import org.eclipse.jdt.ls.core.internal.handlers.LogHandler;
-import org.eclipse.jdt.ls.core.internal.lsp.ExecuteCommandClient;
+import org.eclipse.jdt.ls.core.internal.lsp.ExecuteCommandProposedClient;
 import org.eclipse.jdt.ls.core.internal.lsp.WorkspaceFoldersProposedClient;
 import org.eclipse.lsp4j.ApplyWorkspaceEditParams;
 import org.eclipse.lsp4j.ApplyWorkspaceEditResponse;
@@ -34,7 +34,7 @@ import com.google.common.collect.ImmutableList;
 
 public class JavaClientConnection {
 
-	public interface JavaLanguageClient extends LanguageClient, WorkspaceFoldersProposedClient, ExecuteCommandClient {
+	public interface JavaLanguageClient extends LanguageClient, WorkspaceFoldersProposedClient, ExecuteCommandProposedClient {
 		/**
 		 * The show message notification is sent from a server to a client to ask
 		 * the client to display a particular message in the user interface.
